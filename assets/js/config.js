@@ -5,7 +5,7 @@ window.PORTFOLIO_CONFIG = Object.freeze({
   github: 'https://github.com/ashaw2y1',
   email: 'ahmed.shaw2y.as@gmail.com',
   siteUrl: 'https://ashaw2y1.github.io/ahmed-shawky-portfolio/',
-  socialImage: '', // PLACEHOLDER: absolute URL to an approved social sharing image
+  socialImage: 'https://ashaw2y1.github.io/ahmed-shawky-portfolio/assets/images/ahmed-shawky-og.png',
   repositories: {
     demandPlanning: '', // PLACEHOLDER: sanitized public repository
     digitalPR: '', // PLACEHOLDER: sanitized public repository
