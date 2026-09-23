@@ -3,7 +3,6 @@
 window.PORTFOLIO_CONFIG = Object.freeze({
   linkedin: 'https://www.linkedin.com/in/ashaw2y/',
   github: 'https://github.com/ashaw2y1',
-  email: 'ahmed.shaw2y.as@gmail.com',
   siteUrl: 'https://ashaw2y1.github.io/ahmed-shawky-portfolio/',
   socialImage: 'https://ashaw2y1.github.io/ahmed-shawky-portfolio/assets/images/ahmed-shawky-og.png',
   repositories: {

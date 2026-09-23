@@ -9,12 +9,6 @@
     const url = validURL(config[link.dataset.profile]);
     if (url) link.href = url;
   });
-  if (typeof config.email === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(config.email)) {
-    document.querySelectorAll('[data-email]').forEach(link => {
-      link.href = `mailto:${config.email}`;
-      link.textContent = `${config.email} ↗`;
-    });
-  }
   const base = validURL(config.siteUrl);
   if (base && !document.querySelector('link[rel="canonical"]')) {
     const canonicalURL = new URL(document.body.dataset.page === 'index.html' ? '' : document.body.dataset.page, base.endsWith('/') ? base : `${base}/`).href;
@@ -83,6 +77,51 @@
   }
   window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(updateScroll); } }, { passive: true });
   updateScroll();
+
+  const form = document.getElementById('contact-form');
+  if (form) {
+    const submit = form.querySelector('button[type="submit"]');
+    const status = document.getElementById('contact-status');
+    let sending = false;
+    submit.disabled = false;
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (sending || !form.reportValidity()) return;
+      if (form.elements.namedItem('_gotcha').value) return;
+      sending = true;
+      submit.disabled = true;
+      submit.textContent = 'Sending…';
+      form.dataset.state = 'submitting';
+      status.textContent = '';
+      const payload = new FormData(form);
+      // Lock entered values while the request runs so a successful reset cannot discard new edits.
+      const fields = [...form.querySelectorAll('input, textarea')];
+      fields.forEach(field => { field.readOnly = true; });
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 30000);
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST', body: payload, headers: { Accept: 'application/json' },
+          signal: controller.signal
+        });
+        if (!response.ok) throw new Error('Submission failed');
+        form.reset();
+        form.dataset.state = 'success';
+        status.dataset.analyticsEvent = 'contact_form_success';
+        status.textContent = 'Message sent successfully. I’ll get back to you soon.';
+      } catch (_) {
+        form.dataset.state = 'error';
+        status.dataset.analyticsEvent = 'contact_form_error';
+        status.textContent = 'Something went wrong. Please try again.';
+      } finally {
+        clearTimeout(timeout);
+        fields.forEach(field => { field.readOnly = false; });
+        sending = false;
+        submit.disabled = false;
+        submit.textContent = 'Send message ↗';
+      }
+    });
+  }
   // Reveal is progressive enhancement; content stays visible without JS or observer support.
   if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const observer = new IntersectionObserver(entries => entries.forEach(entry => {
