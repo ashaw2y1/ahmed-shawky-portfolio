@@ -36,15 +36,18 @@ window.PROJECTS_CONFIG = {
     "embedUrl": ""
   },
   "noiPortal": {
-    "name": "NOI / Credit Note / GRN Compliance Portal",
-    "demoUrl": "",
-    "githubUrl": "",
+    "name": "Supplier Benefits & Procurement Reconciliation Analytics",
+    "demoUrl": "https://supplier-benefits-analytics.onrender.com",
+    "githubUrl": "https://github.com/ashaw2y1/supplier-benefits-analytics",
     "liveDemo": true,
-    "demoAvailability": "pending",
+    "demoAvailability": "available",
     "technology": [
       "Python",
       "Flask",
-      "SQLite"
+      "Pandas",
+      "SQLite",
+      "Analytics Engineering",
+      "Procurement Analytics"
     ],
     "projectType": "flask",
     "embedEnabled": false,
