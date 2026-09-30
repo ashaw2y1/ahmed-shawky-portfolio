@@ -44,9 +44,9 @@
     });
     container.querySelectorAll('[data-demo-launch]').forEach(link => {
       link.hidden = reference;
-      setLink(link, available ? demoURL : null, 'Launch Live Demo ↗', maintenance ? 'Temporarily unavailable' : 'Deployment pending');
+      setLink(link, available ? demoURL : null, link.dataset.ctaLabel || 'Launch Live Demo ↗', maintenance ? 'Temporarily unavailable' : 'Deployment pending');
     });
-    container.querySelectorAll('[data-source-link]').forEach(link => setLink(link, publicURL(project.githubUrl), container.tagName === 'MAIN' ? 'View Source Code ↗' : 'Source Code ↗', 'URL pending'));
+    container.querySelectorAll('[data-source-link]').forEach(link => setLink(link, publicURL(project.githubUrl), link.dataset.ctaLabel || (container.tagName === 'MAIN' ? 'View Source Code ↗' : 'Source Code ↗'), 'URL pending'));
     const message = container.querySelector('[data-demo-message]');
     if (message && !reference) message.textContent = available
       ? 'Open the actual application in a new tab. This case study stays open so you can return to the architecture and source code.'

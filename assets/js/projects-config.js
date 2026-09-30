@@ -22,14 +22,17 @@ window.PROJECTS_CONFIG = {
   },
   "digitalPR": {
     "name": "Digital Purchase Request Tracking Portal",
-    "demoUrl": "",
-    "githubUrl": "",
+    "demoUrl": "https://digital-purchase-request-tracker.onrender.com/",
+    "githubUrl": "https://github.com/ashaw2y1/digital-purchase-request-tracker",
     "liveDemo": true,
-    "demoAvailability": "pending",
+    "demoAvailability": "available",
     "technology": [
       "Python",
       "Flask",
-      "SQLite"
+      "Workflow Automation",
+      "Procurement Analytics",
+      "Business Intelligence",
+      "Analytics Engineering"
     ],
     "projectType": "flask",
     "embedEnabled": false,
